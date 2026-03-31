@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>Christmas in New York — Dec 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --f-display: 'Playfair Display', Georgia, serif;
+  --f-body: 'Cormorant Garamond', 'Times New Roman', serif;
+  --f-sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+  --bg: #0a0a0f;
+  --cream: #f5f0e8;
+  --gold: #d4af37;
+  --muted: #a09b8c;
+  --red: #c41e3a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--cream); font-family: var(--f-body); min-height: 100vh; overflow-x: hidden; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0a0a0f; }
+::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.3); border-radius: 3px; }
+a { text-decoration: none; }
+img { display: block; }
+
+/* Animations */
+@keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+@keyframes snow1 { 0% { transform: translateY(-10vh) translateX(0); } 100% { transform: translateY(110vh) translateX(20px); } }
+@keyframes snow2 { 0% { transform: translateY(-10vh) translateX(0); } 100% { transform: translateY(110vh) translateX(-15px); } }
+@keyframes snow3 { 0% { transform: translateY(-10vh) translateX(0); } 100% { transform: translateY(110vh) translateX(10px); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px rgba(212,175,55,0.15); } 50% { box-shadow: 0 0 40px rgba(212,175,55,0.3); } }
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Nav */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: transparent; border-bottom: none;
+  transition: all 0.5s ease; padding: 0 24px;
+}
+.nav.scrolled {
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212,175,55,0.1);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: center; gap: 4; padding: 14px 0; flex-wrap: wrap;
+  opacity: 0; transform: translateY(-10px); transition: all 0.4s ease;
+}
+.nav.scrolled .nav-inner { opacity: 1; transform: translateY(0); }
+.nav-link {
+  font-family: var(--f-sans); font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted); padding: 6px 14px;
+  border-radius: 20px; background: transparent; transition: all 0.3s ease;
+}
+.nav-link.active { color: var(--gold); background: rgba(212,175,55,0.1); }
+
+/* Snow */
+.snow-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.snowflake { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.12); }
+
+/* Sections */
+.section { padding: 100px 24px; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-narrow { max-width: 900px; margin: 0 auto; }
+
+/* Section Title */
+.section-title { text-align: center; margin-bottom: 48px; }
+.section-title .sup { font-family: var(--f-sans); font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.section-title h2 { font-family: var(--f-display); font-size: clamp(28px, 5vw, 48px); font-weight: 400; color: var(--cream); line-height: 1.15; margin: 0; }
+.section-title .sub { font-family: var(--f-body); font-size: 16px; color: var(--muted); margin-top: 14px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+
+/* Grid */
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.grid-3b { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+.grid-food { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+
+/* Stat Card */
+.stat-card {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.15);
+  border-radius: 16px; padding: 28px 20px; text-align: center;
+}
+.stat-card .icon { font-size: 28px; margin-bottom: 8px; }
+.stat-card .value { font-family: var(--f-display); font-size: 24px; color: var(--gold); font-weight: 400; }
+.stat-card .label { font-family: var(--f-sans); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+/* Feature Card */
+.feature-card {
+  background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(212,175,55,0.12); border-radius: 16px; padding: 28px;
+  height: 100%; display: flex; flex-direction: column;
+}
+.feature-card .emoji { font-size: 30px; margin-bottom: 12px; }
+.feature-card h3 { font-family: var(--f-display); font-size: 19px; color: var(--cream); font-weight: 400; margin: 0 0 10px; }
+.feature-card p { font-family: var(--f-body); font-size: 14px; color: var(--muted); line-height: 1.7; flex: 1; margin: 0; }
+.feature-card .price { font-family: var(--f-sans); font-size: 11px; color: var(--gold); margin-top: 14px; letter-spacing: 1px; }
+
+/* Food Card */
+.food-card {
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.1);
+  border-radius: 20px; overflow: hidden;
+}
+.food-card-img {
+  position: relative; width: 100%; height: 220px; overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+.food-card-img img {
+  width: 100%; height: 100%; object-fit: cover; transition: opacity 0.6s ease;
+}
+.food-card-img .overlay {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 65%;
+  background: linear-gradient(transparent, rgba(10,10,15,0.9));
+}
+.food-card-img .badge {
+  position: absolute; top: 14px; right: 14px;
+  background: rgba(212,175,55,0.92); color: #0a0a0f;
+  font-family: var(--f-sans); font-size: 9px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; border-radius: 20px;
+}
+.food-card-img .name-block { position: absolute; bottom: 16px; left: 20px; right: 20px; }
+.food-card-img .name-block .name { font-family: var(--f-display); font-size: 24px; color: var(--cream); font-weight: 400; }
+.food-card-img .name-block .location { font-family: var(--f-sans); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(212,175,55,0.8); margin-top: 3px; }
+.food-card-body { padding: 22px 20px; }
+.food-card-body .meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 14px; padding-bottom: 14px;
+  border-bottom: 1px solid rgba(212,175,55,0.08); flex-wrap: wrap; gap: 8px;
+}
+.food-card-body .meta .order-label { font-family: var(--f-sans); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+.food-card-body .meta .must-try { font-family: var(--f-display); font-size: 17px; color: var(--cream); font-style: italic; }
+.food-card-body .meta .price-tag {
+  font-family: var(--f-sans); font-size: 13px; color: var(--gold); font-weight: 500;
+  background: rgba(212,175,55,0.08); padding: 4px 12px; border-radius: 12px; white-space: nowrap;
+}
+.food-card-body .why { font-family: var(--f-body); font-size: 14.5px; color: var(--muted); line-height: 1.75; margin: 0 0 14px; }
+.food-card-body .tip-box {
+  background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.1);
+  border-radius: 12px; padding: 11px 15px;
+}
+.food-card-body .tip-box p { font-family: var(--f-body); font-size: 13px; color: var(--cream); line-height: 1.65; margin: 0; }
+
+/* Day Card */
+.day-card {
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px; padding: 22px 26px; cursor: pointer; transition: all 0.4s ease;
+}
+.day-card.open { background: rgba(212,175,55,0.06); border-color: rgba(212,175,55,0.25); }
+.day-card-header { display: flex; justify-content: space-between; align-items: center; }
+.day-card-header .left { display: flex; align-items: center; gap: 16px; }
+.day-circle {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #b8860b);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-display); font-size: 17px; color: #0a0a0f; font-weight: 600; flex-shrink: 0;
+}
+.day-card .date { font-family: var(--f-sans); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+.day-card .title { font-family: var(--f-display); font-size: 17px; color: var(--cream); font-weight: 400; }
+.day-card .arrow { color: var(--gold); font-size: 18px; transition: transform 0.3s; }
+.day-card.open .arrow { transform: rotate(180deg); }
+.day-card-details { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(212,175,55,0.1); display: none; }
+.day-card.open .day-card-details { display: block; }
+.highlight-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 9px; }
+.highlight-item:last-child { margin-bottom: 0; }
+.highlight-item .dot { color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+.highlight-item span:last-child { font-family: var(--f-body); font-size: 14px; color: var(--muted); line-height: 1.6; }
+.meal-box {
+  margin-top: 14px; padding: 11px 15px; border-radius: 10px;
+  background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.15);
+}
+.meal-box .meal-label { font-family: var(--f-sans); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+.meal-box .meal-text { font-family: var(--f-body); font-size: 13px; color: var(--cream); margin-left: 8px; }
+
+/* Food Category Header */
+.food-cat-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 24px; margin-top: 56px; padding-bottom: 14px;
+  border-bottom: 1px solid rgba(212,175,55,0.15);
+}
+.food-cat-header .icon { font-size: 28px; }
+.food-cat-header h3 {
+  font-family: var(--f-display); font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 400; color: var(--cream); margin: 0; font-style: italic;
+}
+
+/* Budget Row */
+.budget-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 24px; border-radius: 12px; flex-wrap: wrap; gap: 8px;
+}
+.budget-row:nth-child(odd) { background: rgba(255,255,255,0.02); }
+.budget-row .info { flex: 1; min-width: 200px; }
+.budget-row .cat { font-family: var(--f-display); font-size: 17px; color: var(--cream); }
+.budget-row .desc { font-family: var(--f-body); font-size: 13px; color: var(--muted); margin-top: 2px; }
+.budget-row .range { font-family: var(--f-sans); font-size: 14px; color: var(--gold); letter-spacing: 1px; font-weight: 500; white-space: nowrap; }
+
+/* Price Box */
+.price-box {
+  margin-top: 40px; padding: 32px; border-radius: 20px;
+  background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(196,30,58,0.04) 100%);
+  border: 1px solid rgba(212,175,55,0.15); text-align: center;
+}
+.price-box .label { font-family: var(--f-sans); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.price-box .amount { font-family: var(--f-display); font-size: clamp(30px, 5vw, 50px); color: var(--cream); font-weight: 400; }
+.price-box .note { font-family: var(--f-body); font-size: 14px; color: var(--muted); margin-top: 10px; }
+
+/* Total Box */
+.total-box {
+  margin-top: 32px; padding: 40px; border-radius: 20px; text-align: center;
+  background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(196,30,58,0.06));
+  border: 1px solid rgba(212,175,55,0.25);
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+.total-box .label { font-family: var(--f-sans); font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.total-box .amount { font-family: var(--f-display); font-size: clamp(34px, 6vw, 60px); color: var(--cream); font-weight: 400; }
+.total-box .note { font-family: var(--f-body); font-size: 15px; color: var(--muted); margin-top: 14px; }
+
+/* Timeline item */
+.timeline-item {
+  display: flex; gap: 20px; align-items: flex-start; padding: 18px 24px;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.08); border-radius: 14px;
+  margin-bottom: 14px;
+}
+.timeline-when {
+  font-family: var(--f-sans); font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); background: rgba(212,175,55,0.1); padding: 6px 14px;
+  border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+}
+.timeline-what { font-family: var(--f-body); font-size: 15px; color: var(--cream); line-height: 1.6; }
+
+/* Warning box */
+.warning-box {
+  margin-top: 48px; padding: 28px; border-radius: 20px;
+  background: rgba(196,30,58,0.06); border: 1px solid rgba(196,30,58,0.15);
+}
+.warning-box .warning-title { font-family: var(--f-sans); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+.warning-box .warning-item { font-family: var(--f-body); font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 10px; }
+.warning-box .warning-item:last-child { margin-bottom: 0; }
+
+/* Hero */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  position: relative; padding: 60px 24px;
+  background: radial-gradient(ellipse at 50% 30%, rgba(212,175,55,0.06) 0%, transparent 60%);
+}
+.hero .route {
+  font-family: var(--f-sans); font-size: 11px; letter-spacing: 6px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 24px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+.hero h1 {
+  font-family: var(--f-display); font-size: clamp(36px, 8vw, 80px);
+  font-weight: 400; line-height: 1.05; color: var(--cream); max-width: 800px;
+}
+.hero h1 span { font-style: italic; color: var(--gold); -webkit-text-fill-color: var(--gold); }
+.hero .tagline {
+  font-family: var(--f-body); font-size: clamp(16px, 2.5vw, 22px);
+  color: var(--muted); max-width: 520px; line-height: 1.7; margin-top: 24px;
+}
+.hero-stats { display: flex; gap: 32px; margin-top: 48px; flex-wrap: wrap; justify-content: center; }
+.hero-stat-value { font-family: var(--f-display); font-size: 22px; color: var(--cream); }
+.hero-stat-label { font-family: var(--f-sans); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
+.hero .scroll-hint { margin-top: 60px; animation: float 3s ease-in-out infinite; }
+.hero .scroll-hint a { color: var(--gold); font-size: 24px; }
+
+/* Footer */
+footer {
+  padding: 80px 24px 40px; text-align: center;
+  border-top: 1px solid rgba(212,175,55,0.08);
+}
+footer .quote { font-family: var(--f-display); font-size: clamp(24px, 4vw, 40px); color: var(--cream); font-weight: 400; font-style: italic; }
+footer .sub { font-family: var(--f-sans); font-size: 12px; color: var(--muted); margin-top: 20px; letter-spacing: 3px; text-transform: uppercase; }
+footer .emojis { margin-top: 24px; font-size: 32px; }
+
+/* Hero section photos */
+.hero-photo-strip {
+  display: flex; gap: 12px; margin-top: 40px; justify-content: center; flex-wrap: wrap; max-width: 900px;
+}
+.hero-photo {
+  width: 140px; height: 90px; border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(212,175,55,0.2);
+}
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Section photos */
+.section-photo {
+  width: 100%; max-height: 400px; border-radius: 20px; overflow: hidden;
+  margin-bottom: 40px; border: 1px solid rgba(212,175,55,0.1);
+}
+.section-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Photo grid for experiences */
+.photo-pair {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;
+}
+.photo-pair .photo-item {
+  border-radius: 16px; overflow: hidden; height: 220px;
+  border: 1px solid rgba(212,175,55,0.1);
+}
+.photo-pair .photo-item img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 600px) {
+  .photo-pair { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#flights" class="nav-link" data-section="flights">Flights</a>
+    <a href="#hotel" class="nav-link" data-section="hotel">Hotel</a>
+    <a href="#experiences" class="nav-link" data-section="experiences">Experiences</a>
+    <a href="#food" class="nav-link" data-section="food">Food</a>
+    <a href="#itinerary" class="nav-link" data-section="itinerary">Itinerary</a>
+    <a href="#budget" class="nav-link" data-section="budget">Budget</a>
+    <a href="#tips" class="nav-link" data-section="tips">Tips</a>
+  </div>
+</nav>
+
+<!-- Snow -->
+<div class="snow-container" id="snow"></div>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="fade-in"><div class="route">Bangkok → Dubai → New York</div></div>
+  <div class="fade-in" style="transition-delay:0.2s"><h1>Christmas<br><span>in New York</span></h1></div>
+  <div class="fade-in" style="transition-delay:0.4s"><p class="tagline">10 jours d'ultra-luxe · Emirates First Class A380 · The Plaza Hotel · Le rêve de Maman j'ai raté l'avion</p></div>
+  <div class="fade-in" style="transition-delay:0.5s">
+    <div class="hero-photo-strip">
+      <div class="hero-photo"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Manhattan_from_Weehawken%2C_NJ.jpg&w=300" alt="NYC skyline"></div>
+      <div class="hero-photo"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Rockefeller_Center_Christmas_Tree.JPG&w=300" alt="Rockefeller Tree"></div>
+      <div class="hero-photo"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=New_York_-_Manhattan_-_Plaza_Hotel.jpg&w=300" alt="The Plaza Hotel"></div>
+      <div class="hero-photo"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Rockefeller_Plaza_Christmas.JPG&w=300" alt="Rockefeller Plaza Christmas"></div>
+      <div class="hero-photo"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Times_Square_New_York.jpg&w=300" alt="Times Square"></div>
+    </div>
+  </div>
+  <div class="fade-in" style="transition-delay:0.6s">
+    <div class="hero-stats">
+      <div style="text-align:center"><div class="hero-stat-value">Dec 12–21</div><div class="hero-stat-label">2026</div></div>
+      <div style="text-align:center"><div class="hero-stat-value">$97K–142K</div><div class="hero-stat-label">Budget Total</div></div>
+      <div style="text-align:center"><div class="hero-stat-value">2</div><div class="hero-stat-label">Voyageurs</div></div>
+    </div>
+  </div>
+  <div class="fade-in" style="transition-delay:0.8s"><div class="scroll-hint"><a href="#flights">↓</a></div></div>
+</section>
+
+<!-- FLIGHTS -->
+<section id="flights" class="section">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">
+        <div class="sup">Le Voyage</div>
+        <h2>Emirates First Class A380</h2>
+        <p class="sub">Suites privées, douche à 35 000 pieds, Dom Pérignon, chauffeur Mercedes S-Class.</p>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="photo-pair">
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://cdn.onemileatatime.com/wp-content/uploads/2024/04/Emirates-First-Class-Airbus-A380-12.jpeg" alt="Emirates A380 First Class Private Suite"></div>
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://cdn.onemileatatime.com/wp-content/uploads/2024/04/Emirates-First-Class-Airbus-A380-14.jpeg" alt="Emirates A380 First Class Suite Interior"></div>
+      </div>
+    </div>
+
+    <div class="grid-4">
+      <div class="fade-in"><div class="stat-card"><div class="icon">✈️</div><div class="value">BKK → DXB → JFK</div><div class="label">Route</div></div></div>
+      <div class="fade-in" style="transition-delay:0.1s"><div class="stat-card"><div class="icon">🛏</div><div class="value">14 Suites</div><div class="label">Cabine</div></div></div>
+      <div class="fade-in" style="transition-delay:0.2s"><div class="stat-card"><div class="icon">🚿</div><div class="value">Spa</div><div class="label">Douche</div></div></div>
+      <div class="fade-in" style="transition-delay:0.3s"><div class="stat-card"><div class="icon">🍾</div><div class="value">Dom P.</div><div class="label">Champagne</div></div></div>
+    </div>
+
+    <div class="grid-3">
+      <div class="fade-in"><div class="feature-card"><div class="emoji">🪟</div><h3>Suite Privée</h3><p>Porte coulissante, minibar, lit 2m, pyjamas hydratants, kit Bvlgari et casque B&W à garder.</p></div></div>
+      <div class="fade-in" style="transition-delay:0.1s"><div class="feature-card"><div class="emoji">🍽</div><h3>Gastronomie à la Demande</h3><p>Caviar, Royal Doulton, Dom Pérignon, Dalmore King Alexander III, Hennessy Paradis.</p></div></div>
+      <div class="fade-in" style="transition-delay:0.2s"><div class="feature-card"><div class="emoji">🏛</div><h3>Lounge Dubai</h3><p>Plus grand First lounge au monde : gastro, bar Moët, cigares, spa et cirage.</p></div></div>
+    </div>
+
+    <div class="fade-in" style="transition-delay:0.2s">
+      <div class="price-box">
+        <div class="label">2 Billets A/R First Class</div>
+        <div class="amount">$56,000 — $70,000</div>
+        <div class="note">Réserver 4–6 mois avant · emirates.com · Vérifier « Airbus 380 »</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOTEL -->
+<section id="hotel" class="section" style="background: linear-gradient(180deg, transparent, rgba(212,175,55,0.03), transparent)">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">
+        <div class="sup">L'Hôtel</div>
+        <h2>The Plaza Hotel</h2>
+        <p class="sub">L'hôtel de Kevin McCallister. Vue Central Park, décorations spectaculaires, luxe intemporel.</p>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="photo-pair">
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://wanderingcarol.com/wp-content/uploads/2015/11/Luxury-New-York-hotels-The-Plaza-blog-review-Fitzgerald-Suite.jpg" alt="The Plaza Fitzgerald Suite"></div>
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://wanderingcarol.com/wp-content/uploads/2015/11/Luxury-New-York-hotels-The-Plaza-blog-review-king-room.jpg" alt="The Plaza Hotel King Room"></div>
+      </div>
+    </div>
+
+    <div class="grid-4">
+      <div class="fade-in"><div class="stat-card"><div class="icon">🏨</div><div class="value">5 Étoiles</div><div class="label">Classement</div></div></div>
+      <div class="fade-in" style="transition-delay:0.1s"><div class="stat-card"><div class="icon">🛌</div><div class="value">2 Chambres</div><div class="label">Deluxe King</div></div></div>
+      <div class="fade-in" style="transition-delay:0.2s"><div class="stat-card"><div class="icon">🌙</div><div class="value">10 Nuits</div><div class="label">Durée</div></div></div>
+      <div class="fade-in" style="transition-delay:0.3s"><div class="stat-card"><div class="icon">🎄</div><div class="value">Iconique</div><div class="label">Noël</div></div></div>
+    </div>
+
+    <div class="grid-3">
+      <div class="fade-in"><div class="feature-card"><div class="emoji">🎬</div><h3>'Lost in New York'</h3><p>Limo privée 4h : Empire State, Rockefeller, Carnegie Hall — tous les lieux du film.</p></div></div>
+      <div class="fade-in" style="transition-delay:0.1s"><div class="feature-card"><div class="emoji">🫖</div><h3>Palm Court Tea</h3><p>Afternoon tea festif sous le plafond en vitrail. Accès prioritaire résidents.</p></div></div>
+      <div class="fade-in" style="transition-delay:0.2s"><div class="feature-card"><div class="emoji">📍</div><h3>Emplacement</h3><p>Central Park à vos pieds, Bergdorf en face, Rockefeller à 10 min.</p></div></div>
+    </div>
+
+    <div class="fade-in" style="transition-delay:0.2s">
+      <div class="price-box">
+        <div class="label">2 Chambres · 10 Nuits · Taxes Incluses</div>
+        <div class="amount">$28,000 — $39,000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences" class="section">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">
+        <div class="sup">La Magie</div>
+        <h2>Expériences de Noël</h2>
+        <p class="sub">NYC en décembre = un film grandeur nature.</p>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="photo-pair">
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Rockefeller_Plaza_Christmas.JPG&w=800" alt="Rockefeller Plaza Christmas"></div>
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Rockefeller_Center_Christmas_Tree.JPG&w=800" alt="Rockefeller Center Christmas Tree"></div>
+      </div>
+    </div>
+
+    <div class="grid-3b">
+      <div class="fade-in"><div class="feature-card"><div class="emoji">🎄</div><h3>Rockefeller Tree</h3><p>Sapin 23m, 50K LED, étoile Swarovski. Gratuit, semaine après 21h30.</p><div class="price">GRATUIT</div></div></div>
+      <div class="fade-in" style="transition-delay:0.05s"><div class="feature-card"><div class="emoji">💃</div><h3>Rockettes</h3><p>Christmas Spectacular : Parade des Soldats, finale sous la neige.</p><div class="price">$400–$700/2</div></div></div>
+      <div class="fade-in" style="transition-delay:0.1s"><div class="feature-card"><div class="emoji">🩰</div><h3>Casse-Noisette</h3><p>Balanchine au Lincoln Center. 90 danseurs, sapin de 12m.</p><div class="price">DÈS $59</div></div></div>
+      <div class="fade-in" style="transition-delay:0.15s"><div class="feature-card"><div class="emoji">🏠</div><h3>Dyker Heights</h3><p>Brooklyn, 300K+ lumières/maison. Bus tour + chocolat chaud.</p><div class="price">$59–$79</div></div></div>
+      <div class="fade-in" style="transition-delay:0.2s"><div class="feature-card"><div class="emoji">⛸</div><h3>Patinoire Rockefeller</h3><p>L'iconique rink sous le sapin. VIP lounge chauffé dispo.</p><div class="price">$22–$204</div></div></div>
+      <div class="fade-in" style="transition-delay:0.25s"><div class="feature-card"><div class="emoji">🐴</div><h3>Calèche</h3><p>Central Park, couvertures, skyline illuminée.</p><div class="price">$72–$141</div></div></div>
+      <div class="fade-in" style="transition-delay:0.3s"><div class="feature-card"><div class="emoji">🏬</div><h3>Vitrines Fifth Ave</h3><p>Bergdorf, Tiffany, Saks light show, Macy's.</p><div class="price">GRATUIT</div></div></div>
+      <div class="fade-in" style="transition-delay:0.35s"><div class="feature-card"><div class="emoji">🚂</div><h3>Holiday Train Show</h3><p>200 répliques NYC miniatures + 25 trains. Botanical Garden.</p><div class="price">$35–$43</div></div></div>
+      <div class="fade-in" style="transition-delay:0.4s"><div class="feature-card"><div class="emoji">🔭</div><h3>Top of the Rock</h3><p>ESB en rouge/vert + Central Park. Meilleur panorama de Noël.</p><div class="price">$42–$71</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOD -->
+<section id="food" class="section" style="background: linear-gradient(180deg, transparent, rgba(196,30,58,0.02), transparent)">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-title">
+        <div class="sup">La Table</div>
+        <h2>Les Restaurants Iconiques</h2>
+        <p class="sub">Pour chaque adresse : la photo, LE plat à commander, et pourquoi c'est non-négociable.</p>
+      </div>
+    </div>
+
+    <!-- STEAKS -->
+    <div class="fade-in"><div class="food-cat-header"><span class="icon">🥩</span><h3>Steakhouses Légendaires</h3></div></div>
+    <div class="grid-food">
+      <div class="fade-in">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Peter_Luger_Steak_for_four.jpg&w=800" alt="Peter Luger Porterhouse">
+            <div class="overlay"></div>
+            <div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Peter Luger</div><div class="location">Williamsburg, Brooklyn · est. 1887</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Porterhouse for Two</div></div><div class="price-tag">$120–$140 le steak</div></div>
+            <p class="why">Dry-aged sur place depuis 1887, sélectionné à la main par le boucher. La croûte caramélisée est servie sur assiette brûlante avec beurre fondu. C'est LE steak qui définit New York — rien ne s'en approche.</p>
+            <div class="tip-box"><p>💡 Secret : le burger au bar le midi (~$18) est un hack légendaire. Cash/débit only, pas de CB.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.1s">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://images.squarespace-cdn.com/content/v1/53cc1616e4b0f4361f8ace24/2f4b17ec-68c7-4bb0-a532-269549db956a/Keens+Mutton+chop-mutton+chop-1.jpg" alt="Keens Mutton Chop">
+            <div class="overlay"></div>
+            <div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Keens Steakhouse</div><div class="location">Midtown · est. 1885</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Mutton Chop (750g)</div></div><div class="price-tag">~$51–55</div></div>
+            <p class="why">Un saddle cut de 26 oz d'agneau mature grillé à 540°C. Keens est le seul restaurant au monde qui le sert ainsi. Les 45 000 pipes d'argile au plafond (JP Morgan, Teddy Roosevelt) font partie de l'expérience.</p>
+            <div class="tip-box"><p>💡 Plus grande collection de scotch single malt des USA. Commander un Macallan rare après le repas.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BURGERS -->
+    <div class="fade-in"><div class="food-cat-header"><span class="icon">🍔</span><h3>Les Meilleurs Burgers</h3></div></div>
+    <div class="grid-food">
+      <div class="fade-in">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://sharedappetite.com/wp-content/uploads/2013/12/IMG_8098-37.jpg" alt="Minetta Tavern Black Label Burger">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Minetta Tavern</div><div class="location">Greenwich Village</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Black Label Burger ($38)</div></div><div class="price-tag">$38</div></div>
+            <p class="why">Blend custom de boeuf dry-aged par Pat LaFrieda sur brioche Balthazar. Anthony Bourdain le classait comme son burger favori au monde. La viande a un goût de steak concentré, pas de burger standard.</p>
+            <div class="tip-box"><p>💡 Réserver sur Resy 30 jours avant. Commander aussi le bone marrow en entrée.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.1s">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://biteeatrepeat.com/wp-content/uploads/2023/12/jg-mellon-burger.jpeg?w=768" alt="J.G. Melon Cheeseburger">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">J.G. Melon</div><div class="location">Upper East Side</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Cheeseburger + Cottage Fries</div></div><div class="price-tag">~$15–18</div></div>
+            <p class="why">Nommé meilleur burger de NYC par Bloomberg et Bobby Flay. Pas de chichi : parfaitement assaisonné, cuit au grill avec un fromage fondu impeccable. Le contre-pied total du burger à $38.</p>
+            <div class="tip-box"><p>💡 Cash only, walk-in only. Les cottage fries (rondelles de pomme de terre) sont non-négociables.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIZZA -->
+    <div class="fade-in"><div class="food-cat-header"><span class="icon">🍕</span><h3>Le Pèlerinage Pizza</h3></div></div>
+    <div class="grid-food">
+      <div class="fade-in">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Lucali_Pizza.jpg&w=800" alt="Lucali Pizza Brooklyn">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Lucali</div><div class="location">Carroll Gardens, Brooklyn</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Plain Margherita Pie (18")</div></div><div class="price-tag">~$35–40</div></div>
+            <p class="why">Mark Iacono fait chaque pizza à la main dans un four à 900°F, dans un candy shop aux chandelles. Pâte d'une finesse folle, mozzarella fraîche parfaite. Beyoncé et Jay-Z viennent ici régulièrement.</p>
+            <div class="tip-box"><p>💡 BYOB ! Apporter du vin. Arriver à 15h30 pour la waitlist (ouverture 17h). Cash only. Commander aussi le calzone.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.1s">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://images.squarespace-cdn.com/content/v1/5fb3405312797c6fcd738f7a/538d1af1-55a1-4f48-8bc7-7b38c3509503/Joes_Pizza_NYC_039.jpg" alt="Joe's Pizza NYC Slice">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Joe's Pizza</div><div class="location">Greenwich Village · est. 1975</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Classic Cheese Slice</div></div><div class="price-tag">~$4–5</div></div>
+            <p class="why">LA slice new-yorkaise. Pâte fine, sauce légèrement sucrée, fromage qui s'étire. Tu plies en deux et tu manges en marchant — le geste iconique de NYC. Spider-Man y travaillait dans le film.</p>
+            <div class="tip-box"><p>💡 7 Carmine St est l'original. Ouvert jusqu'à 4–5h du matin. Parfait en late-night.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.2s">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Pepperoni_pizza.jpg&w=600" alt="Pepperoni Pizza">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Prince Street Pizza</div><div class="location">Nolita</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Spicy Spring Pepperoni Square</div></div><div class="price-tag">~$6–7</div></div>
+            <p class="why">La part la plus Instagrammée de NYC — pepperoni cups croustillants, pâte sicilienne épaisse, sauce fra diavolo épicée. Un style unique qui n'existe nulle part ailleurs.</p>
+            <div class="tip-box"><p>💡 Arriver avant 11h30 pour éviter la file. La Soho Square (fromage) est aussi excellente.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITALIAN -->
+    <div class="fade-in"><div class="food-cat-header"><span class="icon">🇮🇹</span><h3>Les Italiens Impossibles</h3></div></div>
+    <div class="grid-food">
+      <div class="fade-in">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://images.squarespace-cdn.com/content/v1/53cc1616e4b0f4361f8ace24/5e970ba3-e854-4893-9c49-a37682cc2086/Carbone-spicy+vodka+rigatoni-1.jpg" alt="Carbone Spicy Rigatoni Vodka">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Carbone</div><div class="location">Greenwich Village</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Spicy Rigatoni Vodka</div></div><div class="price-tag">$150–200/pers.</div></div>
+            <p class="why">L'italien-américain le plus hype de la planète. Serveurs en smoking, ambiance Rat Pack. Les pâtes vodka sont si addictives qu'il existe des comptes Instagram dédiés à ce seul plat. Crème infusée aux piments calabrais.</p>
+            <div class="tip-box"><p>💡 Résa IMPOSSIBLE : Resy à 10h00 pile, 30 jours avant, ça part en 10 sec. Demander les Meatballs off-menu.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.1s">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Cacio_e_pepe.jpg&w=800" alt="Cacio e Pepe - Via Carota">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Via Carota</div><div class="location">West Village</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Cacio e Pepe</div></div><div class="price-tag">$70–100/pers.</div></div>
+            <p class="why">Charme farmhouse italien, ingrédients sublimés par la simplicité. Pecorino romano vieilli + poivre noir frais — 3 ingrédients, perfection absolue. Le cadre du West Village en hiver est magique.</p>
+            <div class="tip-box"><p>💡 Walk-in : arriver avant 17h, attente 1–3h. Les places au bar servent le menu complet avec moins d'attente.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.2s">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Chicken_parmigiana.jpg&w=800" alt="Veal Parmigiana - Emilio's Ballato">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Emilio's Ballato</div><div class="location">Nolita, Houston St</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Veal Antonio (off-menu)</div></div><div class="price-tag">~$80–120/pers.</div></div>
+            <p class="why">Pas de résa, pas de site web, pas de menu visible. Le Veal Antonio : escalope de 450g, sauce vodka, mozzarella fondante, prosciutto. Taylor Swift, Rihanna et Justin Bieber sont des réguliers.</p>
+            <div class="tip-box"><p>💡 Walk-in only, 1–2.5h d'attente. Mardi = moins d'1h. Demander « What's good tonight? » — ils adorent.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.3s">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Lasagna.jpg&w=600" alt="Lasagna al Forno - I Sodi">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">I Sodi</div><div class="location">West Village, Bleecker St</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Lasagna al Forno</div></div><div class="price-tag">$90–130/pers.</div></div>
+            <p class="why">James Beard Award. La chef Rita Sodi cuisine de la vraie toscane. Sa lasagne : 5 couches de ragù bolognese, béchamel et pâte fraîche gratinée. Tiny restaurant, énorme impact.</p>
+            <div class="tip-box"><p>💡 Plus dur que Carbone. Résas à MINUIT sur Resy. Alarme à 23h59.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELIS -->
+    <div class="fade-in"><div class="food-cat-header"><span class="icon">🥯</span><h3>Delis & Bagels Historiques</h3></div></div>
+    <div class="grid-food">
+      <div class="fade-in">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Katz%27s_pastrami_sandwich.jpg&w=800" alt="Katz's Pastrami Sandwich">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Katz's Delicatessen</div><div class="location">Lower East Side · est. 1888</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Pastrami on Rye + Moutarde</div></div><div class="price-tag">~$29–30</div></div>
+            <p class="why">Le deli le plus célèbre au monde (When Harry Met Sally). Le pastrami est fumé 30 jours, tranché à la main. Chaque bouchée est juteuse, poivrée, fond en bouche.</p>
+            <div class="tip-box"><p>💡 Tip cash $2–5 au cutter AVANT — portions plus généreuses. Ne JAMAIS demander « lean ». Ne pas perdre le ticket.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.1s">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://mitziemee.com/wp-content/uploads/2017/02/russ-and-daughters-1.jpg" alt="Russ & Daughters NYC">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Russ & Daughters</div><div class="location">Lower East Side · est. 1914</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Bagel, Cream Cheese & Lox</div></div><div class="price-tag">~$15–22</div></div>
+            <p class="why">110 ans d'expertise : saumon fumé écossais tranché si finement qu'il est presque translucide. Sur bagel frais avec cream cheese aux oignons — le breakfast qui définit NYC. Michelin Bib Gourmand.</p>
+            <div class="tip-box"><p>💡 À 3 blocks de Katz's — faire les deux le même matin. Le Café sur Orchard St a des tables.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESSERTS -->
+    <div class="fade-in"><div class="food-cat-header"><span class="icon">🍪</span><h3>Desserts & Chocolat Chaud</h3></div></div>
+    <div class="grid-food">
+      <div class="fade-in">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Chocolate_chip_cookies.jpg&w=800" alt="Levain Bakery Cookies">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Levain Bakery</div><div class="location">Multiple locations</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Dark Choc Chip & Walnut Cookie</div></div><div class="price-tag">~$5–6</div></div>
+            <p class="why">170g de pur bonheur. Croûte croustillante dehors, centre fondant gooey comme un brownie dedans. Pas un cookie normal — c'est un dessert complet déguisé en cookie.</p>
+            <div class="tip-box"><p>💡 TOUJOURS demander « warm » — le centre fondant est 10x meilleur tiède. UES ou UWS = moins de queue.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.1s">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://images.squarespace-cdn.com/content/v1/53cc1616e4b0f4361f8ace24/1557686655321-XWQD9UJ6UALK90IF3FHL/Jacques+Torres+dumbo-hot+chocolate1.jpg" alt="Jacques Torres Wicked Hot Chocolate">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Jacques Torres</div><div class="location">DUMBO, Brooklyn</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Wicked Hot Chocolate</div></div><div class="price-tag">~$5–7</div></div>
+            <p class="why">Le « Mr. Chocolate » de NYC. Son Wicked Hot Chocolate : piment ancho, chipotle, cannelle — épicé, riche, réconfortant. Après 4h dans le froid de décembre, c'est le meilleur moment de ta journée.</p>
+            <div class="tip-box"><p>💡 Shop DUMBO = le plus atmosphérique (sous le Manhattan Bridge). Acheter aussi les bonbons en souvenir.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.2s">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Cronut.jpg&w=600" alt="Cronut by Dominique Ansel">
+            <div class="overlay"></div><div class="badge">MUST TRY</div>
+            <div class="name-block"><div class="name">Dominique Ansel</div><div class="location">SoHo, Spring St</div></div>
+          </div>
+          <div class="food-card-body">
+            <div class="meta"><div><div class="order-label">COMMANDER ABSOLUMENT</div><div class="must-try">Blossoming Hot Chocolate</div></div><div class="price-tag">~$7–8</div></div>
+            <p class="why">L'inventeur du Cronut. Le Blossoming Hot Chocolate : une fleur en marshmallow qui s'ouvre lentement quand on verse le lait chaud. De l'art comestible, magique en hiver.</p>
+            <div class="tip-box"><p>💡 Le Cronut change de parfum chaque mois — commander aussi. Arriver tôt pour éviter la rupture de stock.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section id="itinerary" class="section">
+  <div class="section-narrow">
+    <div class="fade-in">
+      <div class="section-title">
+        <div class="sup">Le Planning</div>
+        <h2>Itinéraire Jour par Jour</h2>
+        <p class="sub">10 jours orchestrés. Cliquer pour développer.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px" id="itinerary-cards"></div>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section id="budget" class="section" style="background: linear-gradient(180deg, transparent, rgba(212,175,55,0.04), transparent)">
+  <div class="section-narrow">
+    <div class="fade-in">
+      <div class="section-title">
+        <div class="sup">Le Budget</div>
+        <h2>Estimation Totale</h2>
+        <p class="sub">No limit. 2 personnes, 10 jours.</p>
+      </div>
+    </div>
+    <div>
+      <div class="fade-in"><div class="budget-row"><div class="info"><div class="cat">✈️ Vols</div><div class="desc">2× Emirates First A380 A/R</div></div><div class="range">$56,000 – $70,000</div></div></div>
+      <div class="fade-in" style="transition-delay:0.05s"><div class="budget-row"><div class="info"><div class="cat">🏨 Hôtel</div><div class="desc">Plaza, 2 chambres × 10 nuits</div></div><div class="range">$28,000 – $39,000</div></div></div>
+      <div class="fade-in" style="transition-delay:0.1s"><div class="budget-row"><div class="info"><div class="cat">🍽 Restos</div><div class="desc">~$300–500/jour pour 2</div></div><div class="range">$3,000 – $5,000</div></div></div>
+      <div class="fade-in" style="transition-delay:0.15s"><div class="budget-row"><div class="info"><div class="cat">🎄 Activités</div><div class="desc">Rockettes, Nutcracker, etc.</div></div><div class="range">$1,500 – $3,000</div></div></div>
+      <div class="fade-in" style="transition-delay:0.2s"><div class="budget-row"><div class="info"><div class="cat">🚗 Transport</div><div class="desc">Uber Black, 10 jours</div></div><div class="range">$2,000 – $4,000</div></div></div>
+      <div class="fade-in" style="transition-delay:0.25s"><div class="budget-row"><div class="info"><div class="cat">🛍 Shopping</div><div class="desc">Fifth Ave (optionnel)</div></div><div class="range">$5,000 – $20,000</div></div></div>
+      <div class="fade-in" style="transition-delay:0.3s"><div class="budget-row"><div class="info"><div class="cat">💵 Tips</div><div class="desc">Hôtel, restos, chauffeurs</div></div><div class="range">$1,000 – $2,000</div></div></div>
+    </div>
+    <div class="fade-in" style="transition-delay:0.3s">
+      <div class="total-box">
+        <div class="label">Total · 2 Personnes</div>
+        <div class="amount">$97,000 — $142,000</div>
+        <div class="note">Shopping en sus · Réserver tôt = $10K+ d'économies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section id="tips" class="section">
+  <div class="section-narrow">
+    <div class="fade-in">
+      <div class="section-title">
+        <div class="sup">Les Essentiels</div>
+        <h2>Calendrier de Réservation</h2>
+      </div>
+    </div>
+    <div>
+      <div class="fade-in"><div class="timeline-item"><div class="timeline-when">Juin 2026</div><div class="timeline-what">Vols Emirates First + chambres Plaza (vue Central Park)</div></div></div>
+      <div class="fade-in" style="transition-delay:0.1s"><div class="timeline-item"><div class="timeline-when">Août 2026</div><div class="timeline-what">Billets Rockettes + Nutcracker</div></div></div>
+      <div class="fade-in" style="transition-delay:0.2s"><div class="timeline-item"><div class="timeline-when">Nov 2026</div><div class="timeline-what">Résas Carbone, Torrisi, I Sodi — Resy 10h00, 30 jours avant</div></div></div>
+      <div class="fade-in" style="transition-delay:0.3s"><div class="timeline-item"><div class="timeline-when">Nov 2026</div><div class="timeline-what">Patinage Rockefeller + Dyker Heights + Top of the Rock</div></div></div>
+    </div>
+    <div class="fade-in" style="transition-delay:0.3s">
+      <div class="warning-box">
+        <div class="warning-title">⚠️ À ne pas oublier</div>
+        <div class="warning-item">💵 Cash : Peter Luger, J.G. Melon, Corner Bistro, Lucali — pas de CB. Prévoir $500+.</div>
+        <div class="warning-item">📱 App Resy : créer le compte MAINTENANT. C'est le portail pour Carbone, Torrisi, I Sodi, Via Carota.</div>
+        <div class="warning-item">🧥 Météo : 0–7°C. Manteaux chauds, gants, écharpes. Surtout pour Dyker Heights.</div>
+        <div class="warning-item">🚗 Transport : Uber Black. Brooklyn = voiture. Midtown = marcher.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fade-in">
+    <div class="quote">Merry Christmas, you filthy animal.</div>
+    <div class="sub">Bangkok → New York · Décembre 2026</div>
+    <div class="emojis">🎄✨🗽</div>
+  </div>
+</footer>
+
+<script>
+// Snow particles
+(function() {
+  const container = document.getElementById('snow');
+  for (let i = 0; i < 20; i++) {
+    const flake = document.createElement('div');
+    flake.className = 'snowflake';
+    const size = (i % 3) + 2;
+    flake.style.left = ((i * 5.26) % 100) + '%';
+    flake.style.top = '-' + ((i * 3.7) % 10) + 'vh';
+    flake.style.width = size + 'px';
+    flake.style.height = size + 'px';
+    flake.style.animation = 'snow' + ((i % 3) + 1) + ' ' + (8 + (i % 5) * 2.5) + 's linear infinite';
+    flake.style.animationDelay = ((i * 0.7) % 10) + 's';
+    container.appendChild(flake);
+  }
+})();
+
+// Nav scroll effect
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('mainNav');
+  if (window.scrollY > 500) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+}, { passive: true });
+
+// Active section tracking
+const sectionIds = ['hero','flights','hotel','experiences','food','itinerary','budget','tips'];
+const observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.nav-link').forEach(function(link) {
+        link.classList.toggle('active', link.dataset.section === entry.target.id);
+      });
+    }
+  });
+}, { threshold: 0.2, rootMargin: '-20% 0px -40% 0px' });
+sectionIds.forEach(function(id) {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+
+// Fade-in on scroll (IntersectionObserver)
+const fadeObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(function(el) { fadeObserver.observe(el); });
+
+// Itinerary day cards
+var days = [
+  { day:"1", date:"Sam 12 Déc", title:"Arrivée & Première Soirée", highlights:["Arrivée JFK, chauffeur Emirates → The Plaza","Sieste jet lag (BKK +12h)","Déco du Plaza + Champagne Bar","Rockefeller Tree + Saks Light Show"], meal:"Room service au Plaza ou Palm Court" },
+  { day:"2", date:"Dim 13 Déc", title:"Fifth Avenue & Central Park", highlights:["Palm Court Holiday Tea","Vitrines : Bergdorf → Tiffany → Saks","Calèche Central Park 60 min","King Cole Bar au St. Regis"], meal:"Keens Steakhouse — Mutton Chop + scotch" },
+  { day:"3", date:"Lun 14 Déc", title:"Lower East Side & SoHo", highlights:["Russ & Daughters (bagel + lox)","Katz's (pastrami on rye) — 3 blocks","SoHo + Dominique Ansel (Cronut)","Prince Street Pizza (Spicy Spring)"], meal:"Emilio's Ballato — Veal Antonio off-menu" },
+  { day:"4", date:"Mar 15 Déc", title:"Brooklyn Day", highlights:["Peter Luger lunch (burger ou porterhouse)","DUMBO + Jacques Torres Wicked Hot Choc","Bus tour Dyker Heights Lights"], meal:"Rubirosa — Tie Dye vodka pizza" },
+  { day:"5", date:"Mer 16 Déc", title:"Rockettes & Rockefeller", highlights:["Patinage Rockefeller Center","Radio City Christmas Spectacular","Photos au sapin au crépuscule"], meal:"Joe's Pizza + Carbone (si résa)" },
+  { day:"6", date:"Jeu 17 Déc", title:"West Village & Nutcracker", highlights:["Central Park : Bethesda, Bow Bridge","J.G. Melon — burger + cottage fries","Levain Bakery — cookies chauds","The Nutcracker Lincoln Center 19h"], meal:"Via Carota — Cacio e Pepe walk-in 21h30" },
+  { day:"7", date:"Ven 18 Déc", title:"Marchés & Midtown", highlights:["Bryant Park Winter Village (180+ shops)","Shake Shack original Madison Sq Park","Union Square Holiday Market","Top of the Rock au sunset"], meal:"Minetta Tavern — Black Label Burger" },
+  { day:"8", date:"Sam 19 Déc", title:"Pèlerinage Lucali", highlights:["Carroll Gardens 15h pour la waitlist","BYOB + cash only","DUMBO photos nocturnes","230 Fifth rooftop igloos"], meal:"Lucali — Margherita + calzone aux chandelles" },
+  { day:"9", date:"Dim 20 Déc", title:"Botanical Garden & Grand Dîner", highlights:["Holiday Train Show (2h)","Corner Bistro — dive-bar burger","Macy's vitrines","Empire State Building de nuit"], meal:"Torrisi ou I Sodi — dîner d'adieu" },
+  { day:"10", date:"Lun 21 Déc", title:"Dernier Matin & Départ", highlights:["Wollman Rink patinage vue skyline","Zabar's souvenirs (babka, rugelach)","Derniers moments au Plaza","Chauffeur Emirates → JFK EK202 ~23h"], meal:"Champagne Bar — farewell drink" }
+];
+
+var container = document.getElementById('itinerary-cards');
+days.forEach(function(d, idx) {
+  var card = document.createElement('div');
+  card.className = 'fade-in';
+  card.style.transitionDelay = (idx * 0.05) + 's';
+
+  var highlightsHTML = d.highlights.map(function(h) {
+    return '<div class="highlight-item"><span class="dot">✦</span><span>' + h + '</span></div>';
+  }).join('');
+
+  var mealHTML = d.meal ? '<div class="meal-box"><span class="meal-label">🍽 DINING</span><span class="meal-text">' + d.meal + '</span></div>' : '';
+
+  card.innerHTML =
+    '<div class="day-card" onclick="this.classList.toggle(\'open\')">' +
+      '<div class="day-card-header">' +
+        '<div class="left">' +
+          '<div class="day-circle">' + d.day + '</div>' +
+          '<div><div class="date">' + d.date + '</div><div class="title">' + d.title + '</div></div>' +
+        '</div>' +
+        '<div class="arrow">▾</div>' +
+      '</div>' +
+      '<div class="day-card-details">' +
+        '<div>' + highlightsHTML + '</div>' +
+        mealHTML +
+      '</div>' +
+    '</div>';
+
+  container.appendChild(card);
+  fadeObserver.observe(card);
+});
+</script>
+
+</body>
+</html>
