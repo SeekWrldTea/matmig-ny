@@ -338,6 +338,29 @@ footer .emojis { margin-top: 24px; font-size: 32px; }
 <!-- Snow -->
 <div class="snow-container" id="snow"></div>
 
+<!-- MUSIC PLAYER -->
+<div id="musicBtn" onclick="toggleMusic()" style="
+  position: fixed; bottom: 28px; right: 28px; z-index: 200;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #b8860b);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; box-shadow: 0 4px 20px rgba(212,175,55,0.4);
+  transition: all 0.3s ease; border: none;
+  animation: pulseGlow 3s ease-in-out infinite;
+">
+  <span id="musicIcon" style="font-size: 24px; line-height: 1;">🎄</span>
+</div>
+<div id="musicLabel" style="
+  position: fixed; bottom: 36px; right: 92px; z-index: 200;
+  font-family: var(--f-sans); font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  background: rgba(10,10,15,0.85); backdrop-filter: blur(10px);
+  padding: 8px 16px; border-radius: 20px;
+  border: 1px solid rgba(212,175,55,0.2);
+  opacity: 1; transition: opacity 0.5s ease;
+  pointer-events: none;
+">Click for Christmas vibes 🎅</div>
+
 <!-- HERO -->
 <section id="hero" class="hero">
   <div class="fade-in"><div class="route">Bangkok → Dubai → New York</div></div>
@@ -921,6 +944,129 @@ days.forEach(function(d, idx) {
   container.appendChild(card);
   fadeObserver.observe(card);
 });
+
+// === CHRISTMAS MUSIC ===
+var musicPlaying = false;
+var audioCtx = null;
+var gainNode = null;
+var musicTimeout = null;
+
+// "Jingle Bells" + "Have Yourself a Merry Little Christmas" medley
+// Encoded as note sequences played via Web Audio API (no external file needed)
+var jingleBells = [
+  // Jingle Bells chorus
+  [659,200],[659,200],[659,400],
+  [659,200],[659,200],[659,400],
+  [659,200],[784,200],[523,200],[587,200],[659,800],
+  [698,200],[698,200],[698,200],[698,200],
+  [698,200],[659,200],[659,200],[659,100],[659,100],
+  [659,200],[587,200],[587,200],[659,200],[587,400],[784,400],
+  // pause
+  [0,400],
+  // Jingle Bells chorus repeat
+  [659,200],[659,200],[659,400],
+  [659,200],[659,200],[659,400],
+  [659,200],[784,200],[523,200],[587,200],[659,800],
+  [698,200],[698,200],[698,200],[698,200],
+  [784,200],[784,200],[698,200],[587,200],[523,400],[784,400],
+  // pause
+  [0,600],
+  // "It's Beginning to Look a Lot Like Christmas" melody
+  [523,300],[659,300],[784,300],[880,300],[784,300],[659,600],
+  [698,300],[784,300],[880,300],[988,300],[880,600],
+  [784,300],[880,300],[784,300],[659,300],[698,300],[659,600],
+  [587,300],[659,300],[587,300],[523,600],
+  // pause
+  [0,600],
+  // "Have Yourself a Merry Little Christmas" snippet
+  [523,400],[659,400],[784,600],[880,200],
+  [784,400],[698,400],[659,800],
+  [587,400],[659,400],[698,600],[784,200],
+  [659,400],[587,400],[523,800],
+  // pause before loop
+  [0,800],
+];
+
+function playNote(ctx, gain, freq, duration, startTime) {
+  if (freq === 0) return; // rest
+  var osc = ctx.createOscillator();
+  var noteGain = ctx.createGain();
+  // Use a warm, bell-like tone
+  osc.type = 'sine';
+  osc.frequency.value = freq;
+  noteGain.gain.setValueAtTime(0, startTime);
+  noteGain.gain.linearRampToValueAtTime(0.12, startTime + 0.02);
+  noteGain.gain.exponentialRampToValueAtTime(0.001, startTime + duration / 1000);
+  osc.connect(noteGain);
+  noteGain.connect(gain);
+  osc.start(startTime);
+  osc.stop(startTime + duration / 1000 + 0.05);
+
+  // Add harmonics for bell-like quality
+  var osc2 = ctx.createOscillator();
+  var noteGain2 = ctx.createGain();
+  osc2.type = 'sine';
+  osc2.frequency.value = freq * 2;
+  noteGain2.gain.setValueAtTime(0, startTime);
+  noteGain2.gain.linearRampToValueAtTime(0.03, startTime + 0.01);
+  noteGain2.gain.exponentialRampToValueAtTime(0.001, startTime + duration / 1200);
+  osc2.connect(noteGain2);
+  noteGain2.connect(gain);
+  osc2.start(startTime);
+  osc2.stop(startTime + duration / 1000 + 0.05);
+}
+
+function playMelody() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    gainNode = audioCtx.createGain();
+    gainNode.gain.value = 0.6;
+    gainNode.connect(audioCtx.destination);
+  }
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+
+  var time = audioCtx.currentTime + 0.1;
+  var totalDuration = 0;
+  for (var i = 0; i < jingleBells.length; i++) {
+    var freq = jingleBells[i][0];
+    var dur = jingleBells[i][1];
+    playNote(audioCtx, gainNode, freq, dur, time);
+    time += dur / 1000;
+    totalDuration += dur;
+  }
+  // Loop the melody
+  if (musicPlaying) {
+    musicTimeout = setTimeout(function() {
+      if (musicPlaying) playMelody();
+    }, totalDuration + 500);
+  }
+}
+
+function toggleMusic() {
+  musicPlaying = !musicPlaying;
+  var icon = document.getElementById('musicIcon');
+  var label = document.getElementById('musicLabel');
+  if (musicPlaying) {
+    icon.textContent = '🔔';
+    label.style.opacity = '0';
+    playMelody();
+  } else {
+    icon.textContent = '🎄';
+    if (musicTimeout) clearTimeout(musicTimeout);
+    if (audioCtx) {
+      gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.3);
+      setTimeout(function() {
+        if (gainNode) gainNode.gain.value = 0.6;
+      }, 400);
+    }
+  }
+}
+
+// Hide the label after 5 seconds
+setTimeout(function() {
+  var label = document.getElementById('musicLabel');
+  if (label) label.style.opacity = '0';
+}, 5000);
 </script>
 
 </body>
