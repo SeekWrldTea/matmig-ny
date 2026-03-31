@@ -317,6 +317,57 @@ footer .emojis { margin-top: 24px; font-size: 32px; }
 .photo-pair .photo-item img { width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 600px) {
   .photo-pair { grid-template-columns: 1fr; }
+  .photo-trio { grid-template-columns: 1fr; }
+}
+
+/* Photo trio - 3 column grid */
+.photo-trio {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 32px;
+}
+.photo-trio .photo-item {
+  border-radius: 16px; overflow: hidden; height: 200px;
+  border: 1px solid rgba(212,175,55,0.1);
+}
+.photo-trio .photo-item img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Visual experience card with photo */
+.exp-card {
+  border-radius: 20px; overflow: hidden;
+  border: 1px solid rgba(212,175,55,0.12);
+  background: rgba(255,255,255,0.02);
+}
+.exp-card-img {
+  position: relative; width: 100%; height: 180px; overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+.exp-card-img img { width: 100%; height: 100%; object-fit: cover; }
+.exp-card-img .overlay {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 60%;
+  background: linear-gradient(transparent, rgba(10,10,15,0.85));
+}
+.exp-card-img .exp-name {
+  position: absolute; bottom: 12px; left: 16px; right: 16px;
+  font-family: var(--f-display); font-size: 20px; color: var(--cream); font-weight: 400;
+}
+.exp-card-body { padding: 16px 18px; }
+.exp-card-body p { font-family: var(--f-body); font-size: 14px; color: var(--muted); line-height: 1.7; margin: 0 0 10px; }
+.exp-card-body .price { font-family: var(--f-sans); font-size: 11px; color: var(--gold); letter-spacing: 1px; }
+
+/* Full width banner photo */
+.banner-photo {
+  width: 100%; height: 300px; border-radius: 20px; overflow: hidden;
+  margin-bottom: 40px; border: 1px solid rgba(212,175,55,0.1);
+  position: relative;
+}
+.banner-photo img { width: 100%; height: 100%; object-fit: cover; }
+.banner-photo .overlay {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
+  background: linear-gradient(transparent, rgba(10,10,15,0.7));
+}
+.banner-photo .banner-caption {
+  position: absolute; bottom: 20px; left: 24px;
+  font-family: var(--f-sans); font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(212,175,55,0.8);
 }
 </style>
 </head>
@@ -403,6 +454,14 @@ footer .emojis { margin-top: 24px; font-size: 32px; }
       </div>
     </div>
 
+    <div class="fade-in">
+      <div class="photo-trio">
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://viewfromthewing.com/wp-content/uploads/2015/05/IMG_2242.jpg" alt="Emirates A380 Shower Spa"></div>
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Emirates_Airbus_A380-861_onboard_bar_Iwelumo.jpg&w=800" alt="Emirates A380 Onboard Bar"></div>
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://cdn.onemileatatime.com/wp-content/uploads/2024/04/Emirates-First-Class-Airbus-A380-49.jpeg" alt="Emirates A380 Bar Seating"></div>
+      </div>
+    </div>
+
     <div class="grid-4">
       <div class="fade-in"><div class="stat-card"><div class="icon">✈️</div><div class="value">BKK → DXB → JFK</div><div class="label">Route</div></div></div>
       <div class="fade-in" style="transition-delay:0.1s"><div class="stat-card"><div class="icon">🛏</div><div class="value">14 Suites</div><div class="label">Cabine</div></div></div>
@@ -441,6 +500,14 @@ footer .emojis { margin-top: 24px; font-size: 32px; }
       <div class="photo-pair">
         <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://wanderingcarol.com/wp-content/uploads/2015/11/Luxury-New-York-hotels-The-Plaza-blog-review-Fitzgerald-Suite.jpg" alt="The Plaza Fitzgerald Suite"></div>
         <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://wanderingcarol.com/wp-content/uploads/2015/11/Luxury-New-York-hotels-The-Plaza-blog-review-king-room.jpg" alt="The Plaza Hotel King Room"></div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="photo-trio">
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=The_Plaza_Hotel_Interior_Main_Entrance.jpg&w=800" alt="The Plaza Hotel Lobby"></div>
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://heymishka.com/wp-content/uploads/2019/01/Christmas-Tea-at-the-Plaza-Hotel-Hey-Mishka-NYC-Guide-8.jpg" alt="The Plaza Palm Court Christmas Tea"></div>
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Snowstorm_2020_The_Plaza_Hotel_Christmas_Decorations_(50732620368).jpg&w=800" alt="The Plaza Hotel Christmas Decorations"></div>
       </div>
     </div>
 
@@ -485,15 +552,24 @@ footer .emojis { margin-top: 24px; font-size: 32px; }
     </div>
 
     <div class="grid-3b">
-      <div class="fade-in"><div class="feature-card"><div class="emoji">🎄</div><h3>Rockefeller Tree</h3><p>Sapin 23m, 50K LED, étoile Swarovski. Gratuit, semaine après 21h30.</p><div class="price">GRATUIT</div></div></div>
-      <div class="fade-in" style="transition-delay:0.05s"><div class="feature-card"><div class="emoji">💃</div><h3>Rockettes</h3><p>Christmas Spectacular : Parade des Soldats, finale sous la neige.</p><div class="price">$400–$700/2</div></div></div>
-      <div class="fade-in" style="transition-delay:0.1s"><div class="feature-card"><div class="emoji">🩰</div><h3>Casse-Noisette</h3><p>Balanchine au Lincoln Center. 90 danseurs, sapin de 12m.</p><div class="price">DÈS $59</div></div></div>
-      <div class="fade-in" style="transition-delay:0.15s"><div class="feature-card"><div class="emoji">🏠</div><h3>Dyker Heights</h3><p>Brooklyn, 300K+ lumières/maison. Bus tour + chocolat chaud.</p><div class="price">$59–$79</div></div></div>
-      <div class="fade-in" style="transition-delay:0.2s"><div class="feature-card"><div class="emoji">⛸</div><h3>Patinoire Rockefeller</h3><p>L'iconique rink sous le sapin. VIP lounge chauffé dispo.</p><div class="price">$22–$204</div></div></div>
-      <div class="fade-in" style="transition-delay:0.25s"><div class="feature-card"><div class="emoji">🐴</div><h3>Calèche</h3><p>Central Park, couvertures, skyline illuminée.</p><div class="price">$72–$141</div></div></div>
-      <div class="fade-in" style="transition-delay:0.3s"><div class="feature-card"><div class="emoji">🏬</div><h3>Vitrines Fifth Ave</h3><p>Bergdorf, Tiffany, Saks light show, Macy's.</p><div class="price">GRATUIT</div></div></div>
-      <div class="fade-in" style="transition-delay:0.35s"><div class="feature-card"><div class="emoji">🚂</div><h3>Holiday Train Show</h3><p>200 répliques NYC miniatures + 25 trains. Botanical Garden.</p><div class="price">$35–$43</div></div></div>
-      <div class="fade-in" style="transition-delay:0.4s"><div class="feature-card"><div class="emoji">🔭</div><h3>Top of the Rock</h3><p>ESB en rouge/vert + Central Park. Meilleur panorama de Noël.</p><div class="price">$42–$71</div></div></div>
+      <div class="fade-in"><div class="exp-card"><div class="exp-card-img"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=New_York_Christmas_tree_and_skating-rink.jpg&w=800" alt="Rockefeller Tree"><div class="overlay"></div><div class="exp-name">🎄 Rockefeller Tree</div></div><div class="exp-card-body"><p>Sapin 23m, 50K LED, étoile Swarovski. Gratuit, semaine après 21h30.</p><div class="price">GRATUIT</div></div></div></div>
+      <div class="fade-in" style="transition-delay:0.05s"><div class="exp-card"><div class="exp-card-img"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Radio_City_Music_Hall_3713739901_4b1a1131a1.jpg&w=800" alt="Rockettes"><div class="overlay"></div><div class="exp-name">💃 Rockettes</div></div><div class="exp-card-body"><p>Christmas Spectacular : Parade des Soldats, finale sous la neige.</p><div class="price">$400–$700/2</div></div></div></div>
+      <div class="fade-in" style="transition-delay:0.1s"><div class="exp-card"><div class="exp-card-img"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=New_York_City_Ballet_in_Amsterdam,_repetitie_New_York_City_Ballet._Choreograaf_George_Balanchine_geeft_aanwijzingen.jpg&w=800" alt="Casse-Noisette"><div class="overlay"></div><div class="exp-name">🩰 Casse-Noisette</div></div><div class="exp-card-body"><p>Balanchine au Lincoln Center. 90 danseurs, sapin de 12m.</p><div class="price">DÈS $59</div></div></div></div>
+      <div class="fade-in" style="transition-delay:0.15s"><div class="exp-card"><div class="exp-card-img"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Dyker_Lights_(62317).jpg&w=800" alt="Dyker Heights"><div class="overlay"></div><div class="exp-name">🏠 Dyker Heights</div></div><div class="exp-card-body"><p>Brooklyn, 300K+ lumières/maison. Bus tour + chocolat chaud.</p><div class="price">$59–$79</div></div></div></div>
+      <div class="fade-in" style="transition-delay:0.2s"><div class="exp-card"><div class="exp-card-img"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Bow_Bridge_in_Central_Park_on_Thanksgiving_2010.jpg&w=800" alt="Patinoire"><div class="overlay"></div><div class="exp-name">⛸ Patinoire Rockefeller</div></div><div class="exp-card-body"><p>L'iconique rink sous le sapin. VIP lounge chauffé dispo.</p><div class="price">$22–$204</div></div></div></div>
+      <div class="fade-in" style="transition-delay:0.25s"><div class="exp-card"><div class="exp-card-img"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=NYC_Central_Park_Horse_Carriage_in_the_winter.jpg&w=800" alt="Calèche"><div class="overlay"></div><div class="exp-name">🐴 Calèche Central Park</div></div><div class="exp-card-body"><p>Central Park, couvertures, skyline illuminée.</p><div class="price">$72–$141</div></div></div></div>
+      <div class="fade-in" style="transition-delay:0.3s"><div class="exp-card"><div class="exp-card-img"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Saks_Fifth_Avenue_(48155562261).jpg&w=800" alt="Saks Fifth Avenue"><div class="overlay"></div><div class="exp-name">🏬 Vitrines Fifth Ave</div></div><div class="exp-card-body"><p>Bergdorf, Tiffany, Saks light show, Macy's.</p><div class="price">GRATUIT</div></div></div></div>
+      <div class="fade-in" style="transition-delay:0.35s"><div class="exp-card"><div class="exp-card-img"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=New_York_Botanical_Garden_2024_Holiday_Train_Show_Manhattan_diorama.jpg&w=800" alt="Holiday Train Show"><div class="overlay"></div><div class="exp-name">🚂 Holiday Train Show</div></div><div class="exp-card-body"><p>200 répliques NYC miniatures + 25 trains. Botanical Garden.</p><div class="price">$35–$43</div></div></div></div>
+      <div class="fade-in" style="transition-delay:0.4s"><div class="exp-card"><div class="exp-card-img"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=NYC_Top_of_the_Rock_Pano.jpg&w=800" alt="Top of the Rock"><div class="overlay"></div><div class="exp-name">🔭 Top of the Rock</div></div><div class="exp-card-body"><p>ESB en rouge/vert + Central Park. Meilleur panorama de Noël.</p><div class="price">$42–$71</div></div></div></div>
+    </div>
+
+    <!-- Extra experience photos -->
+    <div class="fade-in" style="margin-top:40px">
+      <div class="photo-trio">
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Bryant_Park_Xmas_shopping_jeh.JPG&w=800" alt="Bryant Park Winter Village"></div>
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Empire_State_Building_at_night_20170316.jpg&w=800" alt="Empire State Building Night"></div>
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=DUMBO_(96047423).jpg&w=800" alt="DUMBO Brooklyn Bridge"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -775,6 +851,12 @@ footer .emojis { margin-top: 24px; font-size: 32px; }
         <div class="sup">Le Planning</div>
         <h2>Itinéraire Jour par Jour</h2>
         <p class="sub">10 jours orchestrés. Cliquer pour développer.</p>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="photo-pair" style="margin-bottom:32px">
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Bow_Bridge_in_Central_Park_on_Thanksgiving_2010.jpg&w=800" alt="Central Park Winter"></div>
+        <div class="photo-item"><img loading="lazy" referrerpolicy="no-referrer" src="https://commons.wikimedia.org/w/thumb.php?f=Empire_State_Building_at_night_20170316.jpg&w=800" alt="Empire State Building Night"></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px" id="itinerary-cards"></div>
